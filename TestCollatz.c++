@@ -126,6 +126,18 @@ void test_read_3 () {
         collatz_solve(r, w);
         CPPUNIT_ASSERT(w.str() == "1 10 20\n100 200 125\n201 210 89\n900 1000 174\n");}
 
+    void test_cycle_length_1 () {
+	int v = collatz_cycle_length(10);
+	CPPUNIT_ASSERT(v == 7);}
+
+    void test_cycle_length_2 () {
+	int v = collatz_cycle_length(200);
+	CPPUNIT_ASSERT(v == 27);}
+
+    void test_cycle_length_3 () {
+	int v = collatz_cycle_length(1000);
+	CPPUNIT_ASSERT(v == 112);}
+
     // -----
     // suite
     // -----

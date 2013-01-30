@@ -34,9 +34,33 @@ int collatz_eval (int i, int j) {
     assert(i > 0);
     assert(j > 0);
     // <your code>
-    int v = 1;
+    int x = 0;
+    int y = 0;
+    if(i <= j) {
+        x = i;
+        y = j;}
+    else {
+	x = j;
+	y = i;}
+    assert(x > 0);
+    assert(y > 0);
+    int v = 0;
+    int m = 0; 
+    for(int n = x; n <= y; n++) {
+	m = collatz_cylce_length(x);
+	if(m > v )
+	    v = m;}
     assert(v > 0);
     return v;}
+
+int collatz_cycle_length (int n) {
+    while(n > 1) {
+	if(n % 2)
+	    n = 3 * n + 1;
+	else
+	    n = n / 2;
+    return n;
+}
 
 // -------------
 // collatz_print
