@@ -26,6 +26,17 @@
  */
 bool collatz_read (std::istream&, int&, int&);
 
+// --------------------
+// collatz_cycle_length
+// --------------------
+
+/**
+ * calculates the cycle length of a number n
+ * @param n the number we need the cycle length for
+ * @return the cycle length of the number n
+ */
+int collatz_cycle_length (unsigned int);
+
 // ------------
 // collatz_eval
 // ------------
@@ -61,15 +72,6 @@ void collatz_print (std::ostream&, int, int, int);
  */
 void collatz_solve (std::istream&, std::ostream&);
 
-// --------------------
-// collatz_cycle_length
-// --------------------
 
-/**
- * calculates the cycle length of a number n
- * @param n the number we need the cycle length for
- * @return the cycle length of the number n
- */
-int collatz_cycle_length (int n);
 
 #endif // Collatz_h

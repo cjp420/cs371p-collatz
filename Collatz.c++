@@ -13,6 +13,9 @@
 
 #include "Collatz.h"
 
+const int cache_size = 1000000;
+int cache [cache_size];
+
 // ------------
 // collatz_read
 // ------------
@@ -25,6 +28,29 @@ bool collatz_read (std::istream& r, int& i, int& j) {
     assert(i > 0);
     assert(j > 0);
     return true;}
+
+// --------------------
+// collatz_cycle_length
+// --------------------
+
+int collatz_cycle_length (unsigned int n) {
+    assert(n > 0);
+    int x = n;
+    //std::cout << n << ", checking cache " << std::endl;
+    if (cache[n] != 0)
+        return cache[n];
+    int len = 1;
+    while(x > 1) {
+	//std::cout << x << ", computing " << std::endl;
+	if(x % 2 == 1)
+	    x = 3 * x + 1;
+	else
+	    x = x / 2;
+	len++;}
+    assert(len > 0);
+    //std::cout << n << ", storing in cache " << len << std::endl;
+    cache[n] = len;
+    return len;}
 
 // ------------
 // collatz_eval
@@ -44,23 +70,17 @@ int collatz_eval (int i, int j) {
 	y = i;}
     assert(x > 0);
     assert(y > 0);
+    assert(x <= y);
     int v = 0;
     int m = 0; 
     for(int n = x; n <= y; n++) {
-	m = collatz_cylce_length(x);
-	if(m > v )
+	m = collatz_cycle_length((unsigned int)n);
+	//std::cout << n << ", " << m << std::endl;
+	if(m > v)
 	    v = m;}
     assert(v > 0);
     return v;}
 
-int collatz_cycle_length (int n) {
-    while(n > 1) {
-	if(n % 2)
-	    n = 3 * n + 1;
-	else
-	    n = n / 2;
-    return n;
-}
 
 // -------------
 // collatz_print
